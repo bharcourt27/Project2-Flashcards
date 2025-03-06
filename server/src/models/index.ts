@@ -5,4 +5,4 @@ import { FlashcardFactory } from './card.js';
 const User = UserFactory(sequelize);
 const Flashcard = FlashcardFactory(sequelize);
 
-export { User, Flashcard };
+export { User, Flashcard, sequelize };
