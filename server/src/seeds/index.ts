@@ -1,17 +1,17 @@
 import { seedUsers } from './user-seeds.js';
-import { seedFlashcards } from './card-seeds.js';
+import { seedCards } from './card-seeds.js'; // ✅ Make sure this matches your actual function name
 import { sequelize } from '../models/index.js';
 
 const seedAll = async (): Promise<void> => {
   try {
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ force: true }); // ⚠️ Resets all tables (deletes existing data)
     console.log('\n----- DATABASE SYNCED -----\n');
     
     await seedUsers();
     console.log('\n----- USERS SEEDED -----\n');
     
-    await seedFlashcards();
-    console.log('\n----- TICKETS SEEDED -----\n');
+    await seedCards(); // ✅ Correct function name
+    console.log('\n----- FLASHCARDS SEEDED -----\n'); // ✅ Corrected message
     
     process.exit(0);
   } catch (error) {
