@@ -1,6 +1,8 @@
 export interface Flashcard {
-    _id?: string;
+    _id?: number;
     category: string;
     front: string;
     back: string;
+    userId: number;
+
 }

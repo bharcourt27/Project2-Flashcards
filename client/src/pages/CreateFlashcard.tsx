@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { CreateFlashcard } from '../src/api';
+import { createFlashcard } from '../api/flashcardApi';
 import { Flashcard } from '../types';
 
 const CreateFlashcard: React.FC = () => {
-    const [flashcard, setFlashcard] = useState<Flashcard>({ category: "", front: "", back: "" });
+    const [flashcard, setFlashcard] = useState<Flashcard>({ category: "", front: "", back: "", userId: 0 });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setFlashcard({ ...flashcard, [e.target.name]: e.target.value });
@@ -11,8 +11,8 @@ const CreateFlashcard: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        await CreateFlashcard(flashcard);
-        setFlashcard({ category: "", front: "", back: "" });
+        await createFlashcard(flashcard.front, flashcard.back, flashcard.userId); // ✅ Updated to match Flashcard model
+        setFlashcard({ category: "", front: "", back: "", userId: flashcard.userId });
     };
 
     return (
