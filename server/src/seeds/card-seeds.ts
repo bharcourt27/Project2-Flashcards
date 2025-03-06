@@ -1,11 +1,11 @@
 import { Flashcard } from '../models/card.js';
 
-export const seedcards = async () => {
+export const seedCards = async () => {
   await Flashcard.bulkCreate([
-    { name: 'Design landing page', status: 'In Progress', description: 'Create wireframes and mockups for the landing page.', assignedUserId: 1 },
-    { name: 'Set up project repository', status: 'Done', description: 'Create a new repository on GitHub and initialize it with a README file.', assignedUserId: 2 },
-    { name: 'Implement authentication', status: 'Todo', description: 'Set up user authentication using JWT tokens.', assignedUserId: 1 },
-    { name: 'Test the API', status: 'Todo', description: 'Test the API using Insomnia.', assignedUserId: 1 },
-    { name: 'Deploy to production', status: 'Todo', description: 'Deploy the application to Render.', assignedUserId: 2 },
+    { front: 'What is React?', back: 'A JavaScript library for building user interfaces.', userId: 1 },
+    { front: 'What is TypeScript?', back: 'A superset of JavaScript that adds static types.', userId: 2 },
+    { front: 'Explain JWT authentication.', back: 'JWT (JSON Web Token) is used to securely transmit information between parties.', userId: 1 },
+    { front: 'What is an API?', back: 'An API (Application Programming Interface) allows applications to communicate with each other.', userId: 1 },
+    { front: 'What is database normalization?', back: 'The process of organizing a database to reduce redundancy and improve integrity.', userId: 2 },
   ]);
 };
