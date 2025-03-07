@@ -3,7 +3,7 @@ import { createFlashcard } from '../api/flashcardAPI';
 import { Flashcard } from '../types';
 
 const CreateFlashcard: React.FC = () => {
-    const [flashcard, setFlashcard] = useState<Flashcard>({ category: "", front: "", back: "" });
+    const [flashcard, setFlashcard] = useState<Flashcard>({ category: "", front: "", back: "", userId: 0 });
     const [message, setMessage] = useState<string>('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -13,8 +13,8 @@ const CreateFlashcard: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await createFlashcard(flashcard);
-            setFlashcard({ category: "", front: "", back: "" });
+            await createFlashcard(flashcard.front, flashcard.back, flashcard.userId); // ✅ Updated to match Flashcard model
+            setFlashcard({ category: "", front: "", back: "", userId: flashcard.userId });
             setMessage('Flashcard created successfully!');
         } catch (error) {
             setMessage('Failed to create flashcard. Please try again.');

@@ -1,50 +1,26 @@
-import { Flashcard } from '../types';
+import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_URL = 'http://localhost:5000/api/cards';
 
-export const createFlashcard = async (flashcard: Flashcard): Promise<Flashcard> => {
-  const token = localStorage.getItem('token');
-  const response = await fetch(`${API_BASE_URL}/flashcards`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    },
-    body: JSON.stringify(flashcard),
-  });
-
-  if (!response.ok) {
-    throw new Error('Failed to create flashcard');
-  }
-
-  return response.json();
+// ✅ Get all flashcards
+export const getFlashcards = async () => {
+  const response = await axios.get(API_URL);
+  return response.data;
 };
 
-export const getFlashcards = async (): Promise<Flashcard[]> => {
-  const token = localStorage.getItem('token');
-  const response = await fetch(`${API_BASE_URL}/flashcards`, {
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch flashcards');
-  }
-
-  return response.json();
+// ✅ Get a single flashcard by ID
+export const getFlashcardById = async (id: number) => {
+  const response = await axios.get(`${API_URL}/${id}`);
+  return response.data;
 };
 
-export const deleteFlashcard = async (id: string): Promise<void> => {
-  const token = localStorage.getItem('token');
-  const response = await fetch(`${API_BASE_URL}/flashcards/${id}`, {
-    method: 'DELETE',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    },
-  });
+// ✅ Create a new flashcard
+export const createFlashcard = async (front: string, back: string, userId: number) => {
+  const response = await axios.post(API_URL, { front, back, userId });
+  return response.data;
+};
 
-  if (!response.ok) {
-    throw new Error('Failed to delete flashcard');
-  }
-}; 
+// ✅ Delete a flashcard
+export const deleteFlashcard = async (id: number) => {
+  await axios.delete(`${API_URL}/${id}`);
+};
