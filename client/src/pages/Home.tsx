@@ -1,7 +1,20 @@
-import React from 'react';
+import { useEffect, useState, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { getFlashcards, deleteFlashcard } from '../api/flashcardAPI';
+import ErrorPage from './ErrorPage';
+// import { FlashCardData } from '../interfaces/FlashCardData';
+import { ApiMessage } from '../interfaces/ApiMessage';
+import auth from '../utils/auth';
 
 const Home: React.FC = () => {
+  const [loginCheck, setLoginCheck] = useState(false);
+
+  const checkLogin = () => {
+    if(auth.loggedIn()) {
+      setLoginCheck(true);
+    }
+  };
+
   return (
     <div className="home-container">
       <h1>Welcome to Flashcards</h1>
@@ -27,6 +40,76 @@ const Home: React.FC = () => {
       </div>
     </div>
   );
+
+
+  // const [error, setError] = useState(false);
+  // const [loginCheck, setLoginCheck] = useState(false);
+
+  // const checkLogin = () => {
+  //   if(auth.loggedIn()) {
+  //     setLoginCheck(true);
+  //   }
+  // };
+
+  // const fetchTickets = async () => {
+  //   try {
+  //     const data = await retrieveTickets();
+  //     setTickets(data);
+  //   } catch (err) {
+  //     console.error('Failed to retrieve tickets:', err);
+  //     setError(true);
+  //   }
+  // };
+
+  // const deleteIndvTicket = async (ticketId: number) : Promise<ApiMessage> => {
+  //   try {
+  //     const data = await deleteTicket(ticketId);
+  //     fetchTickets();
+  //     return data;
+  //   } catch (err) {
+  //     return Promise.reject(err);
+  //   }
+  // }
+
+  // useLayoutEffect(() => {
+  //   checkLogin();
+  // }, []);
+
+  // useEffect(() => {
+  //   if(loginCheck) {
+  //     fetchTickets();
+  //   }
+  // }, [loginCheck]);
+
+  // if (error) {
+  //   return <ErrorPage />;
+  // }
+
+  // return (
+  //   <>
+  //   {
+  //     !loginCheck ? (
+  //       <div className='login-notice'>
+  //         <h1>
+  //           Login to create & view tickets
+  //         </h1>
+  //       </div>  
+  //     ) : (
+  //         <div className='board'>
+  //           <button type='button' id='create-ticket-link'>
+  //             <Link to='/create' >New Ticket</Link>
+  //           </button>
+  //           <div className='board-display'>
+
+  //                 <p>Hello World</p>
+  //               );
+  
+  //           </div>
+  //         </div>
+  //       )
+  //   }
+  //   </>
+  // );
 };
 
 export default Home;
