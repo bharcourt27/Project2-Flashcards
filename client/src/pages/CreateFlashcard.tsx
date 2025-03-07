@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CreateFlashcard } from '../src/api';
+import { CreateFlashcard } from '../../api';
 import { Flashcard } from '../types';
 
 const CreateFlashcard: React.FC = () => {
