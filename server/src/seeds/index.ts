@@ -1,5 +1,7 @@
 import { seedUsers } from './user-seeds.js';
+
 import { seedCards } from './card-seeds.js'; // ✅ Make sure this matches your actual function name
+
 import { sequelize } from '../models/index.js';
 
 const seedAll = async (): Promise<void> => {
@@ -10,8 +12,9 @@ const seedAll = async (): Promise<void> => {
     await seedUsers();
     console.log('\n----- USERS SEEDED -----\n');
     
-    await seedCards(); // ✅ Correct function name
-    console.log('\n----- FLASHCARDS SEEDED -----\n'); // ✅ Corrected message
+    await seedCards();
+    console.log('\n----- CARDS SEEDED -----\n');
+
     
     process.exit(0);
   } catch (error) {
