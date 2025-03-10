@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createFlashcard } from '../api/flashcardAPI';
+import { createFlashcard } from '../api/flashcardApi';
 import { FlashCardData } from '../interfaces/FlashCardData';
 
 const CreateFlashcard: React.FC = () => {
@@ -25,24 +25,13 @@ const CreateFlashcard: React.FC = () => {
         <div className="create-flashcard-container">
             <h2>Create a Flashcard</h2>
             <form onSubmit={handleSubmit} className="flashcard-form">
-                <div className="form-group">
-                    <label htmlFor="category">Category</label>
-                    <input
-                        type="text"
-                        id="category"
-                        name="category"
-                        value={flashcard.category}
-                        onChange={handleChange}
-                        placeholder="Enter category"
-                        required
-                    />
-                </div>
+
                 <div className="form-group">
                     <label htmlFor="front">Front</label>
                     <textarea
                         id="front"
                         name="front"
-                        value={flashcard.front}
+                        value={flashcard.front ?? ""}
                         onChange={handleChange}
                         placeholder="Enter front content"
                         required
@@ -53,7 +42,7 @@ const CreateFlashcard: React.FC = () => {
                     <textarea
                         id="back"
                         name="back"
-                        value={flashcard.back}
+                        value={flashcard.back ?? ""}
                         onChange={handleChange}
                         placeholder="Enter back content"
                         required

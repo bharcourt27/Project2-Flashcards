@@ -1,9 +1,9 @@
-import { useEffect, useState, useLayoutEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getFlashcards, deleteFlashcard } from '../api/flashcardAPI';
-import ErrorPage from './ErrorPage';
+// // import { getFlashcards, deleteFlashcard } from '../api/flashcardAPI';
+// import ErrorPage from '../pages/ErrorPage';
 // import { FlashCardData } from '../interfaces/FlashCardData';
-import { ApiMessage } from '../interfaces/ApiMessage';
+// import { ApiMessage } from '../interfaces/ApiMessage';
 import auth from '../utils/auth';
 
 const Home: React.FC = () => {
@@ -75,10 +75,9 @@ const Home: React.FC = () => {
   //   checkLogin();
   // }, []);
 
-  // useEffect(() => {
+  //  useEffect(() => {
   //   if(loginCheck) {
   //     fetchTickets();
-  //   }
   // }, [loginCheck]);
 
   // if (error) {

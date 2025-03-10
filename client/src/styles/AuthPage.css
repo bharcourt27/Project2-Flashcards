@@ -1,15 +1,26 @@
-.auth-container {
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #45B7D1 100%);
-  padding: 20px;
-  animation: gradientBG 15s ease infinite;
-  background-size: 400% 400%;
-  position: relative;
-  overflow: hidden;
+  box-sizing: border-box;
 }
+.auth-container {
+  width: 100vw; /* ✅ Full width but without overflow */
+  height: 100vh; /* ✅ Full height */
+  display: flex;
+  justify-content: center; /* ✅ Perfect horizontal centering */
+  align-items: center; /* ✅ Perfect vertical centering */
+  background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #45B7D1 100%);
+  margin: 0 auto; /* ✅ Ensures it's centered */
+  padding: 0 !important; /* ✅ Force removes any padding */
+  box-sizing: border-box;
+}
+
 
 /* Add floating bubbles in the background */
 .auth-container::before,
@@ -64,18 +75,17 @@
 }
 
 .auth-box {
-  background: rgba(255, 255, 255, 0.95);
+  width: 35vw; /* ✅ Keeps it proportional */
+  max-width: 450px; /* ✅ Prevents it from being too large */
+  min-width: 350px; /* ✅ Prevents it from being too small */
   padding: 40px;
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  width: 100%;
-  max-width: 400px;
-  transform: translateY(0);
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  position: relative;
-  z-index: 1;
   border: 2px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  margin: 0 auto; /* ✅ Ensure it's centered */
+  position: relative;
 }
 
 .auth-box:hover {
@@ -112,8 +122,7 @@
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  animation: fadeIn 0.5s ease;
+  align-items: center;
 }
 
 @keyframes fadeIn {
@@ -176,6 +185,7 @@
   overflow: hidden;
   animation: pulse 2s infinite;
   box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+  width: 100%; /* ✅ Ensures the button is full width */
 }
 
 .auth-button:hover {
@@ -323,4 +333,30 @@
   100% {
     box-shadow: 0 0 0 0 rgba(78, 205, 196, 0);
   }
-} 
+}
+
+
+/* Media Queries for Responsive Design */
+@media (min-width: 768px) {
+  .auth-box {
+    padding: 60px; /* Adjust padding for larger screens */
+  }
+
+  .auth-box h2 {
+    font-size: 32px; /* Increase font size for larger screens */
+  }
+
+  .form-group input {
+    font-size: 18px; /* Increase input font size */
+  }
+
+  .auth-button {
+    font-size: 18px; /* Increase button font size */
+  }
+  @media (max-width: 768px) {
+    .auth-box {
+      width: 80vw; /* ✅ Increases width for mobile */
+      padding: 30px;
+    }
+  }
+}
