@@ -20,13 +20,30 @@ export const login = async (req: Request, res: Response) => {
 
   const secretKey = process.env.JWT_SECRET_KEY || '';
 
-  const token = jwt.sign({ username }, secretKey, { expiresIn: '1h' });
+  const token = jwt.sign({ username }, secretKey, { expiresIn: '24h' });
   return res.json({ token });
+};
+export const register = async (req: Request, res: Response) => {
+  // const { username, email, password } = req.body;
+try {
+  
+  // console.log("================signup===============")
+  // console.log(req.body)
+  const newUser = await User.create(req.body)
+  const secretKey = process.env.JWT_SECRET_KEY || '';
+  
+  const token = jwt.sign({ username:newUser.username }, secretKey, { expiresIn: '24h' });
+  return res.json({ token });
+} catch (err) {
+  console.log(err)
+  return res.status(500).json(err)
+}
 };
 
 const router = Router();
 
 // POST /login - Login a user
 router.post('/login', login);
+router.post('/signup', register);
 
 export default router;

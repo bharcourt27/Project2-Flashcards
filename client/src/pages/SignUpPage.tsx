@@ -31,13 +31,16 @@ const SignUpPage: React.FC = () => {
     e.preventDefault();
     setError('');
 
+    console.log("Submitting signup request to API:", formData); // ✅ Log data before sending
+
+
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
       return;
     }
 
     try {
-      const response = await fetch('/api/auth/signup', {
+      const response = await fetch(`/auth/signup`, { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,8 +51,9 @@ const SignUpPage: React.FC = () => {
           password: formData.password,
         }),
       });
-
+      console.log("API Response Status:", response.status); // ✅ Log response status
       const data = await response.json();
+      console.log("API Response Data:", data); // ✅ Log API response
 
       if (!response.ok) {
         throw new Error(data.message || 'Registration failed');
