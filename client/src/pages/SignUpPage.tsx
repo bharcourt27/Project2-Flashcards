@@ -40,7 +40,7 @@ const SignUpPage: React.FC = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5001/api/auth/signup', { 
+      const response = await fetch(`/auth/signup`, { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -27,8 +27,8 @@ export const register = async (req: Request, res: Response) => {
   // const { username, email, password } = req.body;
 try {
   
-  console.log("================signup===============")
-  console.log(req.body)
+  // console.log("================signup===============")
+  // console.log(req.body)
   const newUser = await User.create(req.body)
   const secretKey = process.env.JWT_SECRET_KEY || '';
   

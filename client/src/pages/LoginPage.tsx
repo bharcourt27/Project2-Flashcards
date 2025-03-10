@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import auth from '../utils/auth.js';
 import '../styles/AuthPage.css';
 
 interface LoginFormData {
@@ -43,15 +44,18 @@ const LoginPage: React.FC = () => {
       }
 
       // Store the token and user data
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
+  
+      if (auth.isTokenExpired(data.token)){
+        throw new Error(data.message || 'Login failed');
+      }
+      auth.login(data.token)
       
       // Show success message
       setError('Login successful! Redirecting to dashboard...');
       
       // Redirect to dashboard after 2 seconds
       setTimeout(() => {
-        navigate('/dashboard');
+        navigate('/');
       }, 2000);
 
     } catch (err) {
@@ -96,7 +100,7 @@ const LoginPage: React.FC = () => {
         <div className="auth-switch">
           <p>
             Don't have an account?{' '}
-            <button onClick={() => navigate('/signup')} className="switch-button">
+            <button onClick={() => navigate('/SignUpPage')} className="switch-button">
               Sign Up
             </button>
           </p>

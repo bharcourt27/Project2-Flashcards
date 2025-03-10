@@ -3,11 +3,12 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import CreateFlashcard from './pages/CreateFlashcard.tsx';
 import LoginPage from './pages/LoginPage.tsx';
 import SignUpPage from './pages/SignUpPage.tsx';
-import Dashboard from './pages/Dashboard.tsx';
+// import Dashboard from './pages/Dashboard.tsx';
+import Home from './pages/Home.tsx';
 import './App.css';
 import ErrorPage from './pages/ErrorPage.tsx';
 import App from './App.tsx';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Dashboard />
+        element: <Home />
       }, 
       // {
       //   path: '/edit',
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
         element: <LoginPage />
       },
       {
-        path: '/signUpPage',
+        path: '/SignUpPage',
         element: <SignUpPage />
       }
     ]

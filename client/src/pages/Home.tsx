@@ -1,19 +1,23 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 // // import { getFlashcards, deleteFlashcard } from '../api/flashcardAPI';
 // import ErrorPage from '../pages/ErrorPage';
 // import { FlashCardData } from '../interfaces/FlashCardData';
 // import { ApiMessage } from '../interfaces/ApiMessage';
-import auth from '../utils/auth';
+import auth from "../utils/auth";
 
 const Home: React.FC = () => {
-  const [loginCheck, setLoginCheck] = useState(false);
 
-  const checkLogin = () => {
-    if(auth.loggedIn()) {
-      setLoginCheck(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!auth.loggedIn()) {
+      navigate('/login');
+    } else {
+      //user is loggedin fetch data to display
     }
-  };
+  }, []);
 
   return (
     <div className="home-container">
@@ -40,7 +44,6 @@ const Home: React.FC = () => {
       </div>
     </div>
   );
-
 
   // const [error, setError] = useState(false);
   // const [loginCheck, setLoginCheck] = useState(false);
@@ -71,10 +74,6 @@ const Home: React.FC = () => {
   //   }
   // }
 
-  // useLayoutEffect(() => {
-  //   checkLogin();
-  // }, []);
-
   //  useEffect(() => {
   //   if(loginCheck) {
   //     fetchTickets();
@@ -92,7 +91,7 @@ const Home: React.FC = () => {
   //         <h1>
   //           Login to create & view tickets
   //         </h1>
-  //       </div>  
+  //       </div>
   //     ) : (
   //         <div className='board'>
   //           <button type='button' id='create-ticket-link'>
@@ -102,7 +101,7 @@ const Home: React.FC = () => {
 
   //                 <p>Hello World</p>
   //               );
-  
+
   //           </div>
   //         </div>
   //       )
