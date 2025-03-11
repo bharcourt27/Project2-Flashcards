@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import auth from '../utils/auth.js';
 import '../styles/AuthPage.css';
+import {login} from '../api/authAPI.js'
 
 interface LoginFormData {
   username: string;
@@ -29,25 +30,8 @@ const LoginPage: React.FC = () => {
     setError('');
 
     try {
-      const response = await fetch('/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Login failed');
-      }
-
-      // Store the token and user data
-  
-      if (auth.isTokenExpired(data.token)){
-        throw new Error(data.message || 'Login failed');
-      }
+      //PLEASE DONT CHANGE CODE BELOW. IT WORKS
+    const data = await login(formData)
       auth.login(data.token)
       
       // Show success message

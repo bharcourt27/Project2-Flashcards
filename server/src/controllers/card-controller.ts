@@ -48,12 +48,16 @@ export const getCardById = async (req: Request, res: Response) => {
 
 // POST /cards
 export const createCard = async (req: Request, res: Response) => {
-  const { front, back, userId } = req.body; // ✅ Changed to match Flashcard model
+  const { front, back } = req.body; // ✅ Changed to match Flashcard model
   try {
-    const newCard = await Flashcard.create({ front, back, userId }); // ✅ Use Flashcard
-    res.status(201).json(newCard);
+    if (typeof req.user?.id=="number"){
+    const newCard = await Flashcard.create({ front, back, userId: req.user?.id }); // ✅ Use Flashcard
+    return res.status(201).json(newCard);
+  }
+  return res.status(401).json({message:'Make sure to log back in'})
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+    console.error(error)
+   return res.status(400).json({ message: error.message });
   }
 };
 

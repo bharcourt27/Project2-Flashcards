@@ -42,8 +42,8 @@
   border-radius: .25em;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, .3);
   background-color: #fff;
-  height: 150px;
-  width: 150px;
+  width: 100%;
+  aspect-ratio: 1/1;
   transform: perspective(1000px) rotateY(var(--rotate-Y, 0deg));
   transform-style: preserve-3d;
   transition: 150ms;
@@ -55,6 +55,7 @@
   position: absolute;
   padding: 1rem;
   backface-visibility: hidden;
+  font-size: 20px;
 }
 
 .card .back {
@@ -69,8 +70,13 @@
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, .4);
   --trandslate-Y: -2px;
 }
-.card .front {
-  left: 0;
+.delete-btn {
+position:relative;
+z-index: 1;
+right: -75px;
+bottom: -30px;
+
+
 }
 
 .flashcard-options {

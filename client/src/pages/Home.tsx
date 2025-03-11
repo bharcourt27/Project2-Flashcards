@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-// // import { getFlashcards, deleteFlashcard } from '../api/flashcardAPI';
+import { getFlashcards } from '../api/flashcardApi.js';
 // import ErrorPage from '../pages/ErrorPage';
 // import { FlashCardData } from '../interfaces/FlashCardData';
 // import { ApiMessage } from '../interfaces/ApiMessage';
@@ -10,23 +10,13 @@ import { FlashCardData } from "../interfaces/FlashCardData";
 import Flashcardlist from "../components/Flashcardlist";
 
 const Home: React.FC = () => {
-  const [flashcards, setFlashcards] = useState<FlashCardData>();
+  const [flashcards, setFlashcards] = useState<FlashCardData[]>([]);
 
   const navigate = useNavigate();
 
   const getCards = async () => {
-    const flashcardsResponse = await fetch('/api/cards', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${auth.getToken()}`,
-      },
-    });
-    if (!flashcardsResponse.ok) {
-      console.log('Failed to get flashcards');
-      return;
-    }
 
-    const flashcardsData = await flashcardsResponse.json();
+    const flashcardsData = await getFlashcards()
     setFlashcards(flashcardsData);
     console.log(flashcardsData);
   }
@@ -42,22 +32,22 @@ const Home: React.FC = () => {
 
   return (
     <div className="home-container">
-      <h1>Welcome to Flashcards</h1>
+      <h1>Welcome to DeckedOut</h1>
       <p>Your personal study companion</p>
       <div className="home-actions">
         <Link to="/create" className="action-button">
           Create New Flashcards
         </Link>
-        <div className="feature-grid">
-          <div className="feature-card">
+        <div className="feature-grid row">
+          <div className="feature-card col">
             <h3>Study</h3>
             <p>Practice with your flashcards</p>
           </div>
-          <div className="feature-card">
+          <div className="feature-card col">
             <h3>Organize</h3>
             <p>Keep your study materials organized</p>
           </div>
-          <div className="feature-card">
+          <div className="feature-card col">
             <h3>Track Progress</h3>
             <p>Monitor your learning journey</p>
           </div>

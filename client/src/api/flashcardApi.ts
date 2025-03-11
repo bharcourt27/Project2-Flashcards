@@ -1,11 +1,22 @@
 import axios from 'axios';
+import auth from '../utils/auth';
 
-const API_URL = 'http://localhost:5000/api/cards';
+const API_URL = '/api/cards';
 
 // ✅ Get all flashcards
 export const getFlashcards = async () => {
-  const response = await axios.get(API_URL);
-  return response.data;
+    const flashcardsResponse = await fetch(API_URL, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${auth.getToken()}`,
+      },
+    });
+    if (!flashcardsResponse.ok) {
+      console.log('Failed to get flashcards');
+      return;
+    }
+
+   return await flashcardsResponse.json();
 };
 
 // ✅ Get a single flashcard by ID
@@ -15,12 +26,30 @@ export const getFlashcardById = async (id: number) => {
 };
 
 // ✅ Create a new flashcard
-export const createFlashcard = async (front: string, back: string, userId: number) => {
-  const response = await axios.post(API_URL, { front, back, userId });
-  return response.data;
+export const createFlashcard = async (front: string, back: string) => {
+  const response = await fetch(API_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${auth.getToken()}`,
+    },
+    body: JSON.stringify({front,back})
+  });
+
+  // Throw error if response status is not OK (200-299)
+  if (!response.ok) {
+    const errorData = await response.json(); // Parse error response as JSON
+    throw new Error(`Error: ${errorData.message}`); // Throw a detailed error message    
+  }
+
+  // Parse the response body as JSON
+  const data = await response.json();
+
+  return data;  // Return the data received from the server
 };
 
 // ✅ Delete a flashcard
 export const deleteFlashcard = async (id: number) => {
-  await axios.delete(`${API_URL}/${id}`);
+  const response = await axios.delete(`${API_URL}/${id}`);
+  return response.data;
 };
