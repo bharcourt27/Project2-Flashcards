@@ -3,13 +3,13 @@ import { FlashCardData } from '../interfaces/FlashCardData'
 
 interface flashcardListProps {
     flashcards: FlashCardData[];
+    removeCard: (id: number) => void;
 }
-
-export default function flashcardlist({ flashcards }: flashcardListProps) {
+export default function flashcardlist({ flashcards,removeCard }: flashcardListProps) {
   return (
     <div className= "Card-grid row">
         {flashcards?.map((flashcard,i) => {
-            return <Flashcard flashcard={flashcard} key={i} />
+            return <Flashcard flashcard={flashcard} removeCard = {removeCard} key={i} />
         })}
     </div>
   )

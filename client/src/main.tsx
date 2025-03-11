@@ -1,25 +1,27 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 // import Home from './pages/Home';
-import CreateFlashcard from './pages/CreateFlashcard.tsx';
-import LoginPage from './pages/LoginPage.tsx';
-import SignUpPage from './pages/SignUpPage.tsx';
+import CreateFlashcard from './pages/CreateFlashcard';
+import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignUpPage';
 // import Dashboard from './pages/Dashboard.tsx';
-import Home from './pages/Home.tsx';
-import ErrorPage from './pages/ErrorPage.tsx';
-import App from './App.tsx';
+import Home from './pages/Home';
+import ErrorPage from './pages/ErrorPage';
+import App from './app';
 import ReactDOM from 'react-dom/client';
+import NavWrapper from './components/NavWrapper';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <ErrorPage />,
+    errorElement: <NavWrapper><ErrorPage /></NavWrapper>,
     children: [
       {
         index: true,
-        element: <Home />
+        element: <NavWrapper><Home /></NavWrapper>,
       }, 
       // {
       //   path: '/edit',
@@ -27,7 +29,7 @@ const router = createBrowserRouter([
       // },
       {
         path: '/create',
-        element: <CreateFlashcard />
+        element: <NavWrapper><CreateFlashcard /></NavWrapper>,
       },
       {
         path: '/login',
