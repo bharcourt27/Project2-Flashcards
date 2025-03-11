@@ -5,10 +5,11 @@ import LoginPage from './pages/LoginPage.tsx';
 import SignUpPage from './pages/SignUpPage.tsx';
 // import Dashboard from './pages/Dashboard.tsx';
 import Home from './pages/Home.tsx';
-import './App.css';
 import ErrorPage from './pages/ErrorPage.tsx';
 import App from './App.tsx';
 import ReactDOM from 'react-dom/client';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 const router = createBrowserRouter([
   {
