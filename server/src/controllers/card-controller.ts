@@ -3,8 +3,9 @@ import { Flashcard } from '../models/card.js'; // ✅ Make sure this file exists
 import { User } from '../models/user.js';
 
 // GET /cards
-export const getAllCards = async (_req: Request, res: Response) => {
+export const getAllCards = async (req: Request, res: Response) => {
   try {
+    const user = req.user;
     const cards = await Flashcard.findAll({ // ✅ Use Flashcard, not card
       include: [
         {
@@ -13,9 +14,11 @@ export const getAllCards = async (_req: Request, res: Response) => {
           attributes: ['username'], // Include only the username attribute
         },
       ],
+      where: { userId: user?.id }, // ✅ Filter by the user's ID
     });
     res.json(cards);
   } catch (error: any) {
+    console.log(error);
     res.status(500).json({ message: error.message });
   }
 };

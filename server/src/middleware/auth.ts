@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 
 interface JwtPayload {
   username: string;
+  id: number;
 }
 
 export const authenticateToken = (
@@ -23,6 +24,7 @@ export const authenticateToken = (
       }
 
       req.user = user as JwtPayload;
+      console.log(req.user);
       return next();
     });
   } else {
