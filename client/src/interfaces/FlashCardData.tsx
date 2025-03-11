@@ -4,3 +4,4 @@ export interface FlashCardData {
   back: string | null;
   userId: number | null;
 }
+

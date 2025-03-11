@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 // // import { getFlashcards, deleteFlashcard } from '../api/flashcardAPI';
@@ -6,16 +6,37 @@ import { useNavigate } from 'react-router-dom';
 // import { FlashCardData } from '../interfaces/FlashCardData';
 // import { ApiMessage } from '../interfaces/ApiMessage';
 import auth from "../utils/auth";
+import { FlashCardData } from "../interfaces/FlashCardData";
+import Flashcardlist from "../components/Flashcardlist";
 
 const Home: React.FC = () => {
+  const [flashcards, setFlashcards] = useState<FlashCardData>();
 
   const navigate = useNavigate();
+
+  const getCards = async () => {
+    const flashcardsResponse = await fetch('/api/cards', {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${auth.getToken()}`,
+      },
+    });
+    if (!flashcardsResponse.ok) {
+      console.log('Failed to get flashcards');
+      return;
+    }
+
+    const flashcardsData = await flashcardsResponse.json();
+    setFlashcards(flashcardsData);
+    console.log(flashcardsData);
+  }
 
   useEffect(() => {
     if (!auth.loggedIn()) {
       navigate('/login');
     } else {
       //user is loggedin fetch data to display
+      getCards();
     }
   }, []);
 
@@ -40,6 +61,7 @@ const Home: React.FC = () => {
             <h3>Track Progress</h3>
             <p>Monitor your learning journey</p>
           </div>
+          <Flashcardlist flashcards={flashcards} />
         </div>
       </div>
     </div>

@@ -38,7 +38,7 @@ app.use(express.static('../client/dist'));
 app.use(routes);
 
 // ✅ Sync database and start server
-sequelize.sync().then(() => {
+sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`);
   });

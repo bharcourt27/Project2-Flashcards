@@ -1,27 +1,25 @@
-import React, { useState } from 'react';
-import { FlashCardData as FlashcardType } from '../interfaces/FlashCardData';
+import { useState } from 'react';
+import { FlashCardData } from '../interfaces/FlashCardData';
 
-interface FlashcardProps {
-    flashcard: FlashcardType;
-}
 
-const Flashcard: React.FC<FlashcardProps> = ({ flashcard }) => {
-    const [flipped, setFlipped] = useState<boolean>(false);
-
+export default function Flashcard({ flashcard }: { flashcard: FlashCardData }) {
+    const [flip, setFlip] = useState(false);
+    console.log(flashcard);
     return (
-        <div 
-            className="flashcard"
-            onClick={() => setFlipped(!flipped)}
-            style={{
-                border: "1px solid #ccc", 
-                padding: "20px", 
-                textAlign: "center", 
-                cursor: "pointer"
-            }}
+        <div
+            className={`card ${flip ? 'flip' : ''}`}
+            onClick={() => setFlip(!flip)}
         >
-            {flipped ? <p>{flashcard.back}</p> : <p>{flashcard.front}</p>}
+            { !flip && (
+                <div className="front">
+                    {flashcard?.front}
+                </div>
+            )}
+            { flip && (
+                <div className="back">
+                    {flashcard?.back}
+                </div>
+            )}
         </div>
     );
-};
-
-export default Flashcard;
+}

@@ -1,4 +1,5 @@
 import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
+import { User } from './user';
 
 
 // Define attributes for Flashcard
@@ -7,6 +8,8 @@ interface FlashcardAttributes {
   front: string;
   back: string;
   userId: number;
+  assignedUserId?: number;
+
 }
 
 // Define creation attributes (id is optional)
@@ -18,6 +21,10 @@ export class Flashcard extends Model<FlashcardAttributes, FlashcardCreationAttri
   public front!: string;
   public back!: string;
   public userId!: number;
+  public assignedUserId!: number;
+
+  // associated User model
+  public readonly assignedUser?: User;
 
   // Timestamp fields
   public readonly createdAt!: Date;
@@ -48,6 +55,10 @@ export function FlashcardFactory(sequelize: Sequelize): typeof Flashcard {
           model: 'users',
           key: 'id',
         },
+      },
+      assignedUserId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
       },
     },
     {
