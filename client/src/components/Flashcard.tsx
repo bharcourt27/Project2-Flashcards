@@ -1,14 +1,23 @@
 import { useState } from "react";
 import { FlashCardData } from "../interfaces/FlashCardData";
 
-export default function Flashcard({ flashcard }: { flashcard: FlashCardData }) {
+interface FlashcardProps {
+
+    flashcard: FlashCardData;
+
+    removeCard: (id: number) => void;
+
+}
+export default function Flashcard({ flashcard, removeCard }: FlashcardProps ) {
   const [flip, setFlip] = useState(false);
-  const handleDelete = () => {
-    console.log("Deleted!")
+  console.log(flashcard)
+  const handleDelete = (e: React.MouseEvent<HTMLSpanElement>) => {
+  const id = Number((e.target as HTMLSpanElement).id);
+  removeCard(id);
   }
   return (
     <div className="col-lg-3 col-md-6 col-sm-12 mb-5">
-        <span className="delete-btn" onClick={handleDelete}>🗑️</span>
+        <span className="delete-btn" onClick={handleDelete} id = {flashcard.id?.toString()}>🗑️</span>
       <div
         className={`card ${flip ? "flip" : ""}`}
         onClick={() => setFlip(!flip)}

@@ -1,9 +1,9 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-}
+} */
 
 .logo {
   height: 6em;
@@ -75,8 +75,7 @@ position:relative;
 z-index: 1;
 right: -75px;
 bottom: -30px;
-
-
+cursor: url('https://icons.iconarchive.com/icons/paomedia/small-n-flat/16/sign-error-icon.png') 8 8, auto;
 }
 
 .flashcard-options {

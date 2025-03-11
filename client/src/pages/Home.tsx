@@ -30,6 +30,12 @@ const Home: React.FC = () => {
     }
   }, []);
 
+  const removeCard = async(id:number) => {
+    const newData = flashcards.filter(obj => obj.id !== id) 
+    setFlashcards(newData)
+    //call delete card api here
+  }
+
   return (
     <div className="home-container">
       <h1>Welcome to DeckedOut</h1>
@@ -51,7 +57,7 @@ const Home: React.FC = () => {
             <h3>Track Progress</h3>
             <p>Monitor your learning journey</p>
           </div>
-          <Flashcardlist flashcards={flashcards} />
+          <Flashcardlist flashcards={flashcards} removeCard = {removeCard}/>
         </div>
       </div>
     </div>
