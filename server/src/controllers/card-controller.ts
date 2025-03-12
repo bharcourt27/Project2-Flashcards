@@ -89,7 +89,7 @@ export const deleteCard = async (req: Request, res: Response) => {
     const card = await Flashcard.findByPk(id); // ✅ Use Flashcard
     if (card) {
       await card.destroy();
-      res.json({ message: 'Card deleted' });
+      res.json({ message: 'Flashcard Deleted' });
     } else {
       res.status(404).json({ message: 'Card not found' });
     }
