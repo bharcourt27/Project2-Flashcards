@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-import { getFlashcards,deleteFlashcard } from '../api/flashcardApi.js';
+import { getFlashcards,deleteFlashcard } from '../api/flashcardApi';
 // import ErrorPage from '../pages/ErrorPage';
 // import { FlashCardData } from '../interfaces/FlashCardData';
 // import { ApiMessage } from '../interfaces/ApiMessage';
