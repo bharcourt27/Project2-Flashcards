@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createFlashcard } from '../api/flashcardApi';
+import { createFlashcard } from '../api/flashcardAPI';
 import { FlashCardData } from '../interfaces/FlashCardData';
 
 const CreateFlashcard: React.FC = () => {
