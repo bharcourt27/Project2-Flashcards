@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { createFlashcard } from '../api/flashcardAPI';
-import { FlashCardData } from '../interfaces/FlashCardData';
+import { CreateFlashcard } from '../../api';
+import { Flashcard } from '../types';
 
 const CreateFlashcard: React.FC = () => {
     const [flashcard, setFlashcard] = useState<FlashCardData>({ front: "", back: ""});
