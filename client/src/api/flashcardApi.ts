@@ -50,6 +50,22 @@ export const createFlashcard = async (front: string, back: string) => {
 
 // ✅ Delete a flashcard
 export const deleteFlashcard = async (id: number) => {
-  const response = await axios.delete(`${API_URL}/${id}`);
-  return response.data;
+  const response = await fetch(`${API_URL}/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${auth.getToken()}`,
+    },
+  });
+
+  // Throw error if response status is not OK (200-299)
+  if (!response.ok) {
+    const errorData = await response.json(); // Parse error response as JSON
+    throw new Error(`Error: ${errorData.message}`); // Throw a detailed error message    
+  }
+
+  // Parse the response body as JSON
+  const data = await response.json();
+
+  return data; 
 };

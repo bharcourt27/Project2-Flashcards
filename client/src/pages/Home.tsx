@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-import { getFlashcards } from '../api/flashcardApi.js';
+import { getFlashcards,deleteFlashcard } from '../api/flashcardApi.js';
 // import ErrorPage from '../pages/ErrorPage';
 // import { FlashCardData } from '../interfaces/FlashCardData';
 // import { ApiMessage } from '../interfaces/ApiMessage';
@@ -34,6 +34,7 @@ const Home: React.FC = () => {
     const newData = flashcards.filter(obj => obj.id !== id) 
     setFlashcards(newData)
     //call delete card api here
+    await deleteFlashcard(id)
   }
 
   return (

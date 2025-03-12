@@ -7,7 +7,7 @@ interface flashcardListProps {
 }
 export default function flashcardlist({ flashcards,removeCard }: flashcardListProps) {
   return (
-    <div className= "Card-grid row">
+    <div className= "row">
         {flashcards?.map((flashcard,i) => {
             return <Flashcard flashcard={flashcard} removeCard = {removeCard} key={i} />
         })}
