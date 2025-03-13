@@ -6,6 +6,8 @@ Table Of Contents:
 # Discription
 # Screenshots
 # Deployed
+# Credits
+
 
 
 Screenshots
@@ -15,3 +17,6 @@ Screenshots
 
 Deployed Application:
 https://project2-flashcards.onrender.com
+
+Credits
+Quinn,Brad,Byron,Obi
